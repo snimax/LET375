@@ -1,28 +1,28 @@
 package com.LET375;
 
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.Arrays;
 
 public class AngloTrainer {
 	// ...
 
-    List<String> words;
+    private TreeSet<String> wordTree;
+    private String letters;
 
     public AngloTrainer(String dictionaryFile) throws IOException {
 	    loadDictionary(dictionaryFile);
 	    dumpDict();
-	    testIncludes();
-	}
+        letters = randomLetters(5);
+        letters = sort(letters); // might aswell save the sorted letters
+    }
 
 	// use this to verify loadDictionary
 	private void dumpDict() {
 	    // Print out the dictionary at the screen.
-        for (String word:words) {
+        for (String word:wordTree) {
             System.out.println(word);
         }
     }
@@ -31,7 +31,8 @@ public class AngloTrainer {
 	    // Read the dictionary into a suitable container.
 	    // The file is a simple text file. One word per line.
         try {
-            words = Files.readAllLines(Paths.get(fileName));
+            List<String> temp = Files.readAllLines(Paths.get(fileName));
+            wordTree = new TreeSet<>(temp);
         }
         catch (IOException e){
             e.printStackTrace();
@@ -40,10 +41,14 @@ public class AngloTrainer {
 
 	private String randomLetters( int length ) {
 	    // this makes vovels a little more likely
-	    String letters = "aabcdeefghiijklmnoopqrstuuvwxyyz";  
+	    String letters = "aabcdeefghiijklmnoopqrstuuvwxyyz";
 	    StringBuffer buf = new StringBuffer(length);
-	    /*for ( int i = 0; i < length; i++ )
-		    buf.append( letters.charAt(randomGenerator.nextInt(letters.length())));*/
+
+	    Random randomGenerator = new Random();
+	    randomGenerator.setSeed(System.currentTimeMillis()); //setting seed of current time for better randomization
+
+	    for ( int i = 0; i < length; i++ )
+		    buf.append( letters.charAt(randomGenerator.nextInt(letters.length())));
 	
 	    return buf.toString();
 	}
@@ -106,6 +111,27 @@ public class AngloTrainer {
 
     public static void main(String[] args) {
         // ... define!
+        Scanner in = new Scanner(System.in);
+        while(true) {
+            String input = in.next();
+            System.out.println(input);
+            if(input.equals("break")){
+                System.out.println("breaking");
+                break;
+            }
+        }
+    }
+
+    private String sort(String s){
+	    char temp[] = new char[s.length()];
+
+	    for(int i = 0; i < s.length(); i++){
+	        temp[i] = s.charAt(i);
+	        System.out.println(temp[i]);
+        }
+
+        Arrays.sort(temp);
+        return new String(temp);
     }
 }
 
