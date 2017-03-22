@@ -14,9 +14,16 @@ public class AngloTrainer {
 
     public AngloTrainer(String dictionaryFile) throws IOException {
 	    loadDictionary(dictionaryFile);
-	    dumpDict();
-        letters = randomLetters(5);
+	    //dumpDict();
+
+	    Random rand = new Random();
+	    rand.setSeed(System.currentTimeMillis());
+	    int length = rand.nextInt() % 5 + 7;// ensures atleast 2 letters, and modulus returns negative numbers apparently
+
+	    System.out.println(length);
+        letters = randomLetters(length);
         letters = sort(letters); // might aswell save the sorted letters
+        System.out.println(letters);
     }
 
 	// use this to verify loadDictionary
@@ -55,10 +62,10 @@ public class AngloTrainer {
 	
 	
 	/* Def. includes	
-	 * Let #(x,s) = the number of occurrences of the charcter x in the string s.
+	 * Let #(x,s) = the number of occurrences of the character x in the string s.
 	 * includes(a,b) holds iff for every character x in b, #(x,b) <= #(x,a)
 	 * 
-	 * A neccessary precondition for includes is that both strings are sorted
+	 * A necessary precondition for includes is that both strings are sorted
 	 * in ascending order.
 	 */
 	private boolean includes( String a, String b ) {
@@ -127,7 +134,7 @@ public class AngloTrainer {
 
 	    for(int i = 0; i < s.length(); i++){
 	        temp[i] = s.charAt(i);
-	        System.out.println(temp[i]);
+	        //System.out.println(temp[i]);
         }
 
         Arrays.sort(temp);

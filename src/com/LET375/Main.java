@@ -9,7 +9,6 @@ public class Main {
 	// write your code here
 
         AngloTrainer test = new AngloTrainer("wordsEn.txt");
-        test.main(args);
 
     }
 }
