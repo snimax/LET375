@@ -1,4 +1,6 @@
-package com.company;
+package com.LET375;
+
+import com.LET375.AngloTrainer;
 
 import java.io.IOException;
 
