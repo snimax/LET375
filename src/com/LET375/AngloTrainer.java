@@ -9,8 +9,8 @@ import java.util.Arrays;
 public class AngloTrainer {
 	// ...
 
-    private TreeSet<String> wordTree;
-    private String letters;
+    static private TreeSet<String> wordTree;
+    static private String letters;
 
     public AngloTrainer(String dictionaryFile) throws IOException {
 	    loadDictionary(dictionaryFile);
@@ -18,12 +18,13 @@ public class AngloTrainer {
 
 	    Random rand = new Random();
 	    rand.setSeed(System.currentTimeMillis());
-	    int length = rand.nextInt() % 5 + 7;// ensures atleast 2 letters, and modulus returns negative numbers apparently
+	    int length = Math.abs(rand.nextInt() % 6)+3;// ensures at least 3 letters, and modulus returns negative numbers apparently
 
 	    System.out.println(length);
         letters = randomLetters(length);
-        letters = sort(letters); // might aswell save the sorted letters
+        letters = sort(letters); // might as well save the sorted letters
         System.out.println(letters);
+        game();
     }
 
 	// use this to verify loadDictionary
@@ -118,13 +119,19 @@ public class AngloTrainer {
 
     public static void main(String[] args) {
         // ... define!
-        Scanner in = new Scanner(System.in);
-        while(true) {
-            String input = in.next();
-            System.out.println(input);
-            if(input.equals("break")){
-                System.out.println("breaking");
-                break;
+    }
+
+    private void lookForWords(){
+        System.out.println("I found:");
+        char[] tmp = letters.toCharArray();
+        for (char c:tmp) {
+            String s = String.valueOf(c);
+            SortedSet<String> result = wordTree.subSet(s, s + Character.MAX_VALUE);
+            for (String blah:result) {
+                if(!includes(letters,sort(blah))){}
+
+                else
+                    System.out.println(blah);
             }
         }
     }
@@ -139,6 +146,29 @@ public class AngloTrainer {
 
         Arrays.sort(temp);
         return new String(temp);
+    }
+
+    private void game(){
+        HashSet<String> usedWords = new HashSet<>();
+        Scanner in = new Scanner(System.in);
+        while(true) {
+            String input = in.next();
+            input=input.toLowerCase(); //To eliminate possible problems
+
+            System.out.println(input);
+            if(includes(letters, sort(input)) && input != null){
+                if(wordTree.contains(input)){
+                    usedWords.add(input);
+                    System.out.println("ok!");
+                }
+                else{
+                    System.out.println("Your suggestion was not found in the dictionary.");
+                    lookForWords();
+                }
+            }
+            else
+                System.out.println("The word: " + input + " contains disallowed letters, the allowed ones are: " + letters +".");
+        }
     }
 }
 

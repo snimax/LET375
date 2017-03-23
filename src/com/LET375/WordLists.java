@@ -2,12 +2,18 @@ package com.LET375;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.TreeSet;
 
 public class WordLists {
 	private Reader in = null;
+	private static TreeSet<String> wordTree;
 
-	public WordLists(String inputFileName) {
+	public WordLists(String inputFileName){
 	    // ... define!
+
 	}
 	
 	private boolean isPunctuationChar(char c) {
@@ -46,6 +52,12 @@ public class WordLists {
 	
 	private String reverse(String s) {
 	    // define!
+		char[] tmp = s.toCharArray();
+		String reverse = "";
+		for(char c:tmp){
+			reverse = c + reverse;
+		}
+		System.out.println(reverse);
         return s;
 	}
 	
@@ -68,6 +80,7 @@ public class WordLists {
 		wl.computeWordFrequencies();
 		wl.computeFrequencyMap();
 		wl.computeBackwardsOrder();
+		System.out.println(wl.reverse("meow"));
 		
 		System.out.println("Finished!");
 	}
