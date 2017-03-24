@@ -129,7 +129,7 @@ public class AngloTrainer {
             SortedSet<String> result = wordTree.subSet(s, s + Character.MAX_VALUE);
             for (String blah:result) {
                 if(!includes(letters,sort(blah))){}
-
+					//handle this
                 else
                     System.out.println(blah);
             }
