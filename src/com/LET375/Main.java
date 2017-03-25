@@ -16,11 +16,6 @@ public class Main {
                 AngloTrainer test = new AngloTrainer("wordsEn.txt");
                 break;
             }
-            else if(input.equals("wordlists")){
-                WordLists wl = new WordLists("provtext.txt");
-                wl.main(args);
-                break;
-            }
         }
     }
 }

@@ -12,7 +12,7 @@ public class AngloTrainer {
     static private TreeSet<String> wordTree;
     static private String letters;
 
-    public AngloTrainer(String dictionaryFile) throws IOException {
+    public AngloTrainer(String dictionaryFile){
 	    loadDictionary(dictionaryFile);
 	    //dumpDict();
 
@@ -35,7 +35,7 @@ public class AngloTrainer {
         }
     }
 
-	private void loadDictionary( String fileName ) {
+	private void loadDictionary( String fileName ){
 	    // Read the dictionary into a suitable container.
 	    // The file is a simple text file. One word per line.
         try {
@@ -119,6 +119,8 @@ public class AngloTrainer {
 
     public static void main(String[] args) {
         // ... define!
+		AngloTrainer at = new AngloTrainer(args[0]);
+		at.game();
     }
 
     private void lookForWords(){
@@ -149,7 +151,6 @@ public class AngloTrainer {
     }
 
     private void game(){
-        HashSet<String> usedWords = new HashSet<>();
         Scanner in = new Scanner(System.in);
         while(true) {
             String input = in.next();
@@ -158,7 +159,6 @@ public class AngloTrainer {
             System.out.println(input);
             if(includes(letters, sort(input)) && input != null){
                 if(wordTree.contains(input)){
-                    usedWords.add(input);
                     System.out.println("ok!");
                 }
                 else{
