@@ -59,7 +59,6 @@ public class AngloTrainer {
 	    StringBuffer buf = new StringBuffer(length);
 
 	    Random randomGenerator = new Random();
-	    randomGenerator.setSeed(System.currentTimeMillis()); //setting seed of current time for better randomization
 
 	    for ( int i = 0; i < length; i++ )
 		    buf.append( letters.charAt(randomGenerator.nextInt(letters.length())));
@@ -124,8 +123,7 @@ public class AngloTrainer {
 	}
 
     public static void main(String[] args) {
-        // ... define!
-		AngloTrainer at = new AngloTrainer("wordsEn.txt");
+		AngloTrainer at = new AngloTrainer("dictionary.txt");
     }
 
     private void lookForWords(){
@@ -135,8 +133,9 @@ public class AngloTrainer {
             String s = String.valueOf(c);
             SortedSet<String> result = wordTree.subSet(s, s + Character.MAX_VALUE);
             for (String blah:result) {
-                if(includes(letters,sort(blah))){}
+                if(includes(letters,sort(blah))) {
 					System.out.println(blah);
+				}
             }
         }
     }
@@ -172,9 +171,11 @@ public class AngloTrainer {
 					break;
                 }
             }
-            else
-                System.out.println("The word: " + input + " contains disallowed letters, the allowed ones are: " + letters +".");
+            else {
+				System.out.println("The word: " + input + " contains disallowed letters, the allowed ones are: " + letters + ".");
+				lookForWords();
 				break;
+			}
         }
     }
 }
