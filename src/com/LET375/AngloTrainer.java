@@ -1,5 +1,3 @@
-package com.LET375;
-
 import java.io.*;
 import java.util.*;
 
@@ -16,10 +14,8 @@ public class AngloTrainer {
 
 	    int length = maxLength;
 
-	    System.out.println(length);
         letters = randomLetters(length);
         letters = sort(letters); // might as well save the sorted letters
-        System.out.println(letters);
         game();
     }
 
@@ -130,8 +126,7 @@ public class AngloTrainer {
 
     public static void main(String[] args) {
         // ... define!
-		AngloTrainer at = new AngloTrainer(args[0]);
-		at.game();
+		AngloTrainer at = new AngloTrainer("wordsEn.txt");
     }
 
     private void lookForWords(){
@@ -141,10 +136,8 @@ public class AngloTrainer {
             String s = String.valueOf(c);
             SortedSet<String> result = wordTree.subSet(s, s + Character.MAX_VALUE);
             for (String blah:result) {
-                if(!includes(letters,sort(blah))){}
-					//handle this
-                else
-                    System.out.println(blah);
+                if(includes(letters,sort(blah))){}
+					System.out.println(blah);
             }
         }
     }
@@ -163,11 +156,13 @@ public class AngloTrainer {
 
     private void game(){
         Scanner in = new Scanner(System.in);
+		System.out.println("Random letters are: " + letters);
+		System.out.println("Try to build as many words as you can!");
+
         while(in.hasNext()) {
             String input = in.next();
             input=input.toLowerCase(); //To eliminate possible problems
 
-            System.out.println(input);
             if(includes(letters, sort(input)) && input != null){
                 if(wordTree.contains(input)){
                     System.out.println("ok!");
@@ -175,10 +170,12 @@ public class AngloTrainer {
                 else{
                     System.out.println("Your suggestion was not found in the dictionary.");
                     lookForWords();
+					break;
                 }
             }
             else
                 System.out.println("The word: " + input + " contains disallowed letters, the allowed ones are: " + letters +".");
+				break;
         }
     }
 }
