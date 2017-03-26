@@ -1,24 +1,20 @@
 package com.LET375;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.*;
 import java.util.*;
-import java.util.Arrays;
 
 public class AngloTrainer {
 	// ...
 
-    static private TreeSet<String> wordTree;
+    static private TreeSet<String> wordTree = new TreeSet<>();
     static private String letters;
+    static private int maxLength = 0;
 
     public AngloTrainer(String dictionaryFile){
 	    loadDictionary(dictionaryFile);
 	    //dumpDict();
 
-	    Random rand = new Random();
-	    rand.setSeed(System.currentTimeMillis());
-	    int length = Math.abs(rand.nextInt() % 6)+3;// ensures at least 3 letters, and modulus returns negative numbers apparently
+	    int length = maxLength;
 
 	    System.out.println(length);
         letters = randomLetters(length);
@@ -39,12 +35,27 @@ public class AngloTrainer {
 	    // Read the dictionary into a suitable container.
 	    // The file is a simple text file. One word per line.
         try {
-            List<String> temp = Files.readAllLines(Paths.get(fileName));
-            wordTree = new TreeSet<>(temp);
+            String str;
+            int strLength;
+			BufferedReader input = new BufferedReader(new FileReader(fileName));
+
+			while((str = input.readLine()) != null){
+				strLength = str.length();
+				if(strLength > 0){
+					wordTree.add(str);
+					if(strLength > maxLength)
+						maxLength = strLength;
+				}
+			}
         }
-        catch (IOException e){
-            e.printStackTrace();
-        }
+		catch (FileNotFoundException e) {
+			System.out.println("File not found: " + e.getMessage());
+			return;
+		}
+		catch (IOException e) {
+			System.out.println("IO error: " + e.getMessage());
+			return;
+		}
 	}
 
 	private String randomLetters( int length ) {
@@ -152,7 +163,7 @@ public class AngloTrainer {
 
     private void game(){
         Scanner in = new Scanner(System.in);
-        while(true) {
+        while(in.hasNext()) {
             String input = in.next();
             input=input.toLowerCase(); //To eliminate possible problems
 
