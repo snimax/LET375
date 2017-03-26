@@ -61,7 +61,6 @@ public class WordLists {
 	}
 	
 	private String reverse(String s) {
-	    // define!
 		char[] tmp = s.toCharArray();
 		String reverse = "";
 		for(char c:tmp){
@@ -74,7 +73,6 @@ public class WordLists {
 		Writer writer = new FileWriter("alfaSorted.txt");
 
 		for(Map.Entry<String, Number> entry: wordMap.entrySet()){
-			//Map.Entry me = (Map.Entry)i.next();
 			writer.write(entry.getKey() + "    " + entry.getValue() + "\r\n");
 		}
 		writer.close();
@@ -84,7 +82,6 @@ public class WordLists {
 	
 
 	private void computeFrequencyMap() throws IOException{
-          // define!
 		Comparator<Number> descendingComp = (a, b) -> b.intValue() - a.intValue();
 		TreeMap<Number, TreeSet<String>> freqMap = new TreeMap<>(descendingComp);
 		Object[] keys = wordMap.keySet().toArray();

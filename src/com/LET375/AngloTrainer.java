@@ -149,7 +149,6 @@ public class AngloTrainer {
 
 	    for(int i = 0; i < s.length(); i++){
 	        temp[i] = s.charAt(i);
-	        //System.out.println(temp[i]);
         }
 
         Arrays.sort(temp);
