@@ -11,11 +11,6 @@ public class Main {
 
         Scanner in = new Scanner(System.in);
         String input = in.next();
-        while(true) {
-            if(input.equals("anglotrainer")) {
-                AngloTrainer test = new AngloTrainer("wordsEn.txt");
-                break;
-            }
-        }
+
     }
 }

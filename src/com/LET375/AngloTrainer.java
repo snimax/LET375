@@ -12,9 +12,8 @@ public class AngloTrainer {
 	    loadDictionary(dictionaryFile);
 	    //dumpDict();
 
-	    int length = maxLength;
 
-        letters = randomLetters(length);
+        letters = randomLetters(maxLength);
         letters = sort(letters); // might as well save the sorted letters
         game();
     }
@@ -22,7 +21,7 @@ public class AngloTrainer {
 	// use this to verify loadDictionary
 	private void dumpDict() {
 	    // Print out the dictionary at the screen.
-        for (String word:wordTree) {
+        for (String word : wordTree) {
             System.out.println(word);
         }
     }
@@ -132,7 +131,7 @@ public class AngloTrainer {
     private void lookForWords(){
         System.out.println("I found:");
         char[] tmp = letters.toCharArray();
-        for (char c:tmp) {
+        for (char c : tmp) {
             String s = String.valueOf(c);
             SortedSet<String> result = wordTree.subSet(s, s + Character.MAX_VALUE);
             for (String blah:result) {
