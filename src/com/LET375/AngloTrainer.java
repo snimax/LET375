@@ -167,16 +167,15 @@ public class AngloTrainer {
                 }
                 else{
                     System.out.println("Your suggestion was not found in the dictionary.");
-                    lookForWords();
 					break;
                 }
             }
             else {
 				System.out.println("The word: " + input + " contains disallowed letters, the allowed ones are: " + letters + ".");
-				lookForWords();
 				break;
 			}
         }
+		lookForWords();
     }
 }
 
