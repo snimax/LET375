@@ -1,3 +1,7 @@
+// Author(s):   Axel Andersson,               Henrik Andersson
+// Email:	    anaxel@student.chalmers.se,   henrian@student.chalmers.se
+// Date:	    2017-03-26
+
 import java.io.*;
 import java.util.*;
 

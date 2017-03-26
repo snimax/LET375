@@ -1,3 +1,7 @@
+// Author(s):   Axel Andersson,               Henrik Andersson
+// Email:	    anaxel@student.chalmers.se,   henrian@student.chalmers.se
+// Date:	    2017-03-25
+
 import java.io.*;
 import java.util.*;
 
@@ -6,23 +10,20 @@ public class WordLists {
 	private static TreeMap<String, Number> wordMap = new TreeMap<>();
 
 	public WordLists(String inputFileName) throws IOException{
-	    // ... define!
-
 		in = new FileReader(inputFileName);
-		String a;
-		do {
-			a = getWord();
 
-			if(a != null) {
-				//System.out.println(a);
-				if(wordMap.containsKey(a)){
-					wordMap.put(a, wordMap.get(a).intValue() + 1); //
-				}
-				else{
-					wordMap.put(a, 1);
-				}
+		String s = getWord();
+
+		while (s != null && !s.equals("")) {
+			if (wordMap.containsKey(s)) {
+				wordMap.put(s, wordMap.get(s).intValue() + 1);
+			} else {
+				wordMap.put(s, 1);
 			}
-		}while(a !=null);
+
+			s = getWord();
+		}
+
 	}
 	
 	private boolean isPunctuationChar(char c) {
